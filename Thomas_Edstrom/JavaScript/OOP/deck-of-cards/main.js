@@ -1,9 +1,15 @@
 $(function(){
 	var currentDeck = null;
 	var currentPlayer = null;
+	var currentCard = null;
 
 	$("#newgame").click(function(){
+		$("#hand").empty();
+		$("#deck").empty();
 		$("#deck").append("<img src='img/b1fv.png' alt='deck'>")
+		currentDeck = new DeckConstructor();
+		currentPlayer = new PlayerConstructor();
+
 	})
 
 
@@ -17,10 +23,19 @@ $(function(){
 		currentDeck = new DeckConstructor()
 	})
 	$("#deal").click(function(){
-		var card = currentDeck.deal_random();
-		console.log(card);
-		$("#hand").append("<img src='img/" + card + ".png'>");
-			
+		if (currentPlayer){
+			var card = currentDeck.deal_random();
+			$("#hand").append("<img src='img/" + card + ".png' id='" + card + "'>");
+			currentPlayer.hand.push(card);
+			currentCard = card;	
+		}else{
+			alert("please create a player");
+		}
+
+	})
+	$("#discard").click(function(){
+		$("#" + currentPlayer.hand[currentPlayer.hand.length-1]).remove();
+		currentPlayer.hand.pop();
 	})
 })
 
