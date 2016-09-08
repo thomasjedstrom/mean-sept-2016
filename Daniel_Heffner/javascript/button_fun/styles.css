@@ -1,0 +1,13 @@
+*{
+	font-family: sans-serif;
+}
+
+button {
+	display: block;
+	height: 150px;
+	width: 150px;
+	text-align: center;
+	color: white;
+	background-color: darkblue;
+	margin: 15px auto;
+}
