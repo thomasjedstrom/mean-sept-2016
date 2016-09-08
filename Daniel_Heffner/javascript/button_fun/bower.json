@@ -1,0 +1,21 @@
+{
+  "name": "button_fun",
+  "authors": [
+    "Daniel H <dheffner2010@gmail.com>"
+  ],
+  "description": "codingdojoassignment",
+  "main": "index.html",
+  "license": "MIT",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^3.1.0"
+  }
+}
