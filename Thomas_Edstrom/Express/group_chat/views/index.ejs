@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Group Chat</title>
+	<link rel='stylesheet' href='/static/style.css' />
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<script type ="text/javascript" src="/socket.io/socket.io.js"></script>
+	<script type ="text/javascript">
+		$(document).ready(function (){
+
+			var socket = io.connect();
+
+
+			// LOGGING IN
+			$("#OK").click(function(event){
+				event.preventDefault();
+				socket.emit("new_user", {name: $("#user_name").val()})
+			})
+			// Login Fail
+			socket.on('login_failure', function(){
+				alert("Sorry, that name is already taken :(")
+			})
+			// Login Success
+			socket.on('login_success', function(data){
+				$("#signup").fadeOut();
+				$("#conversationpage").fadeIn();
+
+				$("#conversation").append("<p class='join'>" + data.message +"</p>");
+			})
+
+
+			// LEAVING MESAGES
+			$("#send").click(function(event){
+				event.preventDefault();
+				socket.emit("new_message", {content: $("#said").val()})
+				$("#said").val(null);
+			})
+
+			socket.on("new_broadcast", function(data){
+				$("#conversation").append("<span class='name'>" + data.name +":   </span><span class='message'>" + data.content + "</span><br>");
+			})
+
+			// Displaying all messages
+			function displaymessages(data){
+				$("#conversation").append("<span class='name'>" + data.name +":   </span><span class='message'>" + data.content + "</span><br>");
+			}
+			// Recieve all messages
+			socket.on('messages', function(data){
+				displaymessages(data);	
+			})
+
+
+
+			// LOGGING OUT
+			$("#leave").click(function(event){
+				socket.emit("user_disconnect")
+				$("#signup").fadeIn();
+				$("#conversationpage").fadeOut();
+			})
+			// Disconnect Message
+			socket.on("disconnect_message", function(data){
+				$("#conversation").append("<p class='left'>" + data.message +"</p>");
+			})
+
+		})
+	</script>
+</head>
+<body>
+<div id="container">
+	<div id="signup">
+		<form id="new_user">
+			<p>The page at https://localhost says:</p>
+			<p>Your name:</p>
+			<input type="text" id="user_name">
+			<input type="submit" value="OK" name="OK" id="OK">
+		</form>
+	</div>
+
+	<div id="conversationpage">
+		<h2><u><b>Conversation Board</b></u></h2>
+		<div id="conversation"></div>
+		<form id="saying">
+			<input type="text" id="said">
+			<input type="submit" value="Send" id="send">
+		</form>
+		<button id="leave">Leave Chat</button>
+	</div>
+
+	
+</div>
+	
+</body>
+</html>
+
+
+
