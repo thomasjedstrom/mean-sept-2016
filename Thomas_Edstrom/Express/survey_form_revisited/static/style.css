@@ -1,0 +1,10 @@
+*{
+	font-family: sans-serif;
+}
+#response{
+	display: none;
+	background: lightgreen;
+	border: 3px solid black;
+	padding: 10px;
+	max-width: 700px;
+}
