@@ -1,0 +1,22 @@
+*{
+    margin:0px;
+    padding:0px;
+    font-family: arial;
+}
+#container{
+    margin:0px auto;
+    width:500px;
+}
+#epicbutton{
+    border-radius: 5px;
+    background-color: blue;
+    color:white;
+    margin:10px;
+    padding:10px;
+}
+#reset{
+    background-color: red;
+    color:white;
+    margin:5px;
+    padding:5px;
+}

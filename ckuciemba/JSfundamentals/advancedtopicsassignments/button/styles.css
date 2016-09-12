@@ -1,0 +1,19 @@
+#container{
+    margin:0px auto;
+    width:300px;
+
+}
+#button{
+    margin-top:200px;
+    background-color: blue;
+    height:100px;
+    width:200px;
+    border:1px solid black;
+    color:white;
+}
+.red{
+    background-color: red;
+}
+.green{
+    background-color: green;
+}
