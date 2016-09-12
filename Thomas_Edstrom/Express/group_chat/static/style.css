@@ -1,0 +1,69 @@
+*{
+	font-family: sans-serif;
+}
+#container{
+	width: 700px;
+	text-align: center;
+	margin: auto;
+}
+#signup{
+	max-width: 400px;
+	border: 3px solid black;
+	margin: auto;
+	padding: 20px;
+	position: fixed;
+	top:40vh;
+	left:40vw;
+}
+
+
+
+
+
+
+#conversationpage{
+	text-align: left;
+	display: none;
+}
+#conversation{
+	width: 700px;
+	min-height: 700px;
+	max-height: 700px;
+	border: 3px solid black;
+	overflow: auto;
+}
+#saying{
+	width: 700px;
+}
+input{
+	border: 3px solid black;
+}
+#saying>input[type="text"]{
+	margin-top: 30px;
+	width: 680px;
+	padding: 10px;
+}
+#saying>input[type="submit"]{
+	margin-top: 20px;
+	float: right;
+}
+
+button{
+	border: 3px solid black;
+	background: red;
+	color: white;
+	margin-top: 20px;
+}
+
+.name{
+	font-weight: bold;
+	display: inline-block;
+	width: 100px;
+	margin: 6px;
+}
+.join{
+	color: darkgreen;
+}
+.left{
+	color: darkred;
+}
