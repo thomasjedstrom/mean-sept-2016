@@ -34,15 +34,12 @@ var server = app.listen(8000, function() {
 
 //////////////////  SOCKETS  ///////////////////////////////
 
-
 var users = {};
 var messages = [];
 
 var io = require('socket.io').listen(server)
 
 io.sockets.on('connection', function (socket) {
-	// console.log("Socket Connected!");
-	// console.log(socket.id);
 
 	var cur_user;
 
