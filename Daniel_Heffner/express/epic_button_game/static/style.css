@@ -1,0 +1,39 @@
+* {
+	font-family: sans-serif;
+	border: 0;
+	outline: 0;
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+.container {
+	width: 500px;
+	text-align: center;
+	padding: 25px;
+	margin: auto;
+}
+button {
+	display: block;
+}
+	#epic {
+		width: 300px;
+		height: 150px;
+		background-color: darkblue;
+		color: white;
+		font-weight: bold;
+		margin: auto;
+	}
+	#reset {
+		background-color: darkred;
+		color: white;
+		font-weight: bold;
+		position: relative;
+		padding: 10px;
+		top: 50px;
+		left: 100%;
+	}
+
+p {
+	margin: 15px 0px 30px 0px;
+}
