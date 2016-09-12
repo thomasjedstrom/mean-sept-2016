@@ -1,0 +1,54 @@
+<html>
+<head>
+    <title>Survey Form Revisited</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script type ="text/javascript" src="/socket.io/socket.io.js"></script>
+    <script type ="text/javascript">
+        $ (document).ready(function(){
+            var socket= io.connect();
+
+            $("#survey_form").submit(function(data){
+                socket.emit("posting_form", {
+                    name:$("#name").val(),
+                    location:$("#location").val(),
+                    language:$("#language").val(),
+                    comment:$("#comment").val()
+                });
+                return false;
+            });
+            socket.on("updated_msg", function(data){
+                // console.log(data);
+                $("updated_msg").html("you sent the following message to the server: " + JSON.stringify(data.response));
+            })
+            socket.on("rannum", function(data){
+                $("#rannum").html("The number from the server is : " + JSON.stringify(data.response));
+            });
+        });
+    </script>
+</head>
+<body>
+    <div id ="container">
+        <div id="updated_msg"></div>
+        <div id="rannum"></div>
+        <div id="content">
+            <form action='' id="survey_form">
+                <label>Your Name: <input type="text" name="name" id="name"></label>
+                <label>Dojo Location: <select name="location" id="location">
+                    <option value="dallas">Dallas</option>
+                    <option value="someplace">Another Location</option>
+                    <option value="another">Another Location</option>
+                    <option value="some">Another</option>
+                </select></label>
+                <label>Favorite Language: <select name="language" id="language">
+                    <option value="python">Python</option>
+                    <option value="html">HTML</option>
+                    <option value="css">CSS</option>
+                    <option value="javascript">Javascript</option>
+                </select></label>
+                <label>Comment(optional): <textarea name="comment" id="comment"></textarea></label>
+                <input type='submit' value="Submit">
+            </form>
+        </div>
+    </div>
+</body>
+</html>
