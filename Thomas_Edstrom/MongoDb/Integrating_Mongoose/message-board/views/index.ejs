@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>A Web Page</title>
+	<link rel="stylesheet" href="/static/style.css">
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<script type="text/javascript" src="/static/app.js"></script>
+</head>
+<body>
+
+	<h1>The Dojo Message Board</h1>
+	
+	<% if(typeof(errors) != 'undefined' ) { %>
+		<h3 class="error"><%= errors %></h3>
+	<% } %>
+
+
+	<form action="/posts" method="POST">
+		<label for="name">Name:</label>
+		<input type="text" name="name"><br>
+		<label for="content">Message:</label>
+		<textarea name="content" cols="70" rows="4"></textarea><br>
+		<input type="submit" value="Post Message!">
+	</form>
+
+
+	<% if(data){ %>
+		<% for(i in data){ %>
+			<hr>
+			<h3 class="post">Name: <%= data[i].name%></h3>
+			<h3 class="post">Message: <%= data[i].content%></h3>
+
+			<% if(data[i]._comments){ %>
+				<% for(var j=0; j< data[i]._comments.length; j++){ %>
+					<p class="comment">Name: <%= data[i]._comments[j].name %></p>
+					<p class="comment">Comment: <%= data[i]._comments[j].content %></p>
+					<br>
+				<% } %>
+			<% } %>			
+
+			<div class="comment">
+				<form action="/posts/<%= data[i]._id %>" method="POST">
+					<label for="name">Name:</label>
+					<input type="text" name="name"><br>
+					<label for="content">Comment:</label>
+					<textarea name="content" cols="50" rows="3"></textarea><br>
+					<input type="submit" value="Post Comment!">
+				</form>
+			</div>
+		<% } %>
+	<% } %>
+
+
+
+
+
+
+
+</body>

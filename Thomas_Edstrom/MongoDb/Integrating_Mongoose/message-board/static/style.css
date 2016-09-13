@@ -1,0 +1,13 @@
+*{
+	font-family: sans-serif;
+}
+
+.post{
+	margin: 0px 0px 20px 30px;
+}
+.comment{
+	margin: 0px 0px 20px 60px;
+}
+.error{
+	color: red;
+}
