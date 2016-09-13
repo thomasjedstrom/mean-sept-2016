@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>All Rabbits</title>
+</head>
+<body>
+
+
+<h1>All Rabbits</h1>
+
+	<% if(data){ %>	
+		<ul>
+		<% for(i in data){ %>
+			<li><a href="/<%= data[i]._id %>"><%= data[i].name %></a></li>
+			<form action="/<%= data[i]._id %>/delete/" method='post'>
+				<input type="submit" value="Delete">
+			</form>
+		<% } %>
+		</ul>
+	<% } %>
+
+	<a href="/new">Create a new rabbit</a>
+
+</body>
+</html>
