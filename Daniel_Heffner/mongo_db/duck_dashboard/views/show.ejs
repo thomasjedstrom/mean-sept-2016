@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Duck Dashboard</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+</head>
+<body>
+	<nav class="navbar navbar-inverse navbar-static-top">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="/">
+					<img src="http://images.bigwhiteduck.com/site/bwd-white-left-128.png" alt="Duck Brand" width="25" height="25">
+				</a>
+			</div>
+			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav">
+					<li><a href="/">Home<span class="sr-only">(current)</span></a></li>
+					<li><a href="/ducks/new">Add a Duck</a></li>
+					<li><a href="https://en.wikipedia.org/wiki/Duck">About Ducks</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-offset-3 col-md-6">
+				<h1><%= duck.name %></h1>
+				<img src="<%= duck.img_link %>" alt="A duck" class="img-rounded img-responsive">
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-offset-3 col-md-6">
+				<table class="table">
+					<tr>
+						<th>Age</th>
+						<td><%= duck.age %></td>
+					</tr>
+					<tr>
+						<th>Species</th>
+						<td><%= duck.species %></td>
+					</tr>
+					<tr>
+						<th>Favorite Food</th>
+						<td><%= duck.fav_food %></td>
+					</tr>
+				</table>
+				<div class="row">
+					<div class="col-md-6">
+						<a href="/" class="btn btn-primary">Home</a>
+						<a href="/ducks/<%= duck._id %>/edit" class="btn btn-primary">Edit</a>
+					</div>
+					<div class="col-md-6">
+						<form action="/ducks/<%= duck._id %>/destroy" method="post">
+							<input type="submit" value="Delete" class="btn btn-danger">
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
+
