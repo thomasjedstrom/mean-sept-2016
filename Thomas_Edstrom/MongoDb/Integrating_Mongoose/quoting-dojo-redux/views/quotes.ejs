@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Quotes</title>
+</head>
+<body>
+
+	<h1>Here are the awesome quotes!</h1>
+
+	<% if(data){ %>
+		<% for(i in data){ %>
+			<p>"<%= data[i].content%>"</p>
+			<span><%= data[i].name %> at <%= data[i]._id.getTimestamp() %> </span>
+			<hr>
+		<% } %>
+	<% } %>
+	
+</body>
+</html>

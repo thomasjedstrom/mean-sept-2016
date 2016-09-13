@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>All Rabbits</title>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<script type="text/javascript" src="/static/app.js"></script>
+</head>
+<body>
+
+	<h1>Welcome to QuotingDojo</h1>
+	
+	<form action="/quotes" method="POST">
+		<label for="name">Your name:</label>
+		<input type="text" name="name"><br>
+		<label for="content">Your quote:</label>
+		<textarea name="content" cols="30" rows="10"></textarea><br>
+		<input type="submit" value="Add my quote!">
+	</form>
+	<button id="skip">Skip to Quotes!</button>
+
+
+
+
+</body>
+</html>
