@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" ng-app='app'>
+<head>
+	<meta charset="UTF-8">
+	<title>First Angular Page</title>
+	<script src="./bower_components/angular/angular.min.js"></script>
+	<script>
+		var app = angular.module('app', []);
+		app.controller('divController', function(){
+			this.food = [
+				{name: 'Pizza'},
+				{name: 'BBQ'},
+				{name: 'Fries'},
+				{name: 'Salad'},
+				{name: 'Steak'},
+			];
+			this.addFood = function(){
+				this.food.push(this.newFood);
+				this.newFood = {};
+			}
+		});
+
+	</script>
+</head>
+<body>
+	
+
+
+	<div ng-controller="divController as divCtrl">
+		
+		<form>
+			Favorite Food <input type='text' ng-model='divCtrl.newFood.name'>
+			<input type='submit' value='Add Food' ng-click='divCtrl.addFood()'>
+		</form>
+		<span>Currently typing:</span> <span ng-bind="divCtrl.newFood.name"></span>
+		<br>
+		<br>
+		<br>
+
+
+		<div class="foods">
+			<input ng-model="filterText" placeholder="filter">
+
+
+
+
+			<ul>
+				<li ng-repeat="food in divCtrl.food | filter:filterText">{{ food.name }}</li>
+			</ul>
+		</div>
+
+
+	</div>
+
+
+</body>
+</html>
