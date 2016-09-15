@@ -1,0 +1,31 @@
+<div ng-controller="user_controller">
+	<form ng-submit="addUser()">
+		<label>First Name <input type="text" ng-model="fname"></label>
+		<label>Last Name <input type="text" ng-model="lname"></label>
+		<label>Favorite Language <input type="text" ng-model="language"></label>
+		<input type="submit" value="Create User">
+	</form>
+	<div ng-if="errors != []">
+		<ul>
+			<li ng-repeat="error in errors">{{ error }}</li>
+		</ul>
+	</div>
+	<table>
+		<thead>
+			<tr>
+				<th ng-click="orderBy('fname')"><button>First Name</button></th>
+				<th ng-click="orderBy('lname')"><button>Last Name</button></th>
+				<th ng-click="orderBy('language')"><button>Favorite Language</button></th>
+				<th>Actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="user in users | orderBy:col:reverse">
+				<td>{{user.fname}}</td>
+				<td>{{user.lname}}</td>
+				<td>{{user.language}}</td>
+				<td><button ng-click="destroyUser(user.id)">Delete User</button></td>
+			</tr>
+		</tbody>
+	</table>
+</div>
