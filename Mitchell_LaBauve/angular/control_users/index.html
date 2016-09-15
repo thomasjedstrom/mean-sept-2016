@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head>
+	<title>Users Controller</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.5/angular.min.js"></script>
+	 <script type='text/javascript' src="./app.js"></script>
+</head>
+<body ng-controller="users">
+
+	<form>
+		First Name: <input type="text" ng-model="newUser.firstname"></br>
+		Last Name: <input type="text" ng-model="newUser.lastname"></br>
+		Favorite Language: <input type="text" ng-model="newUser.lang">
+		<input type="submit" ng-click="addUser()"></br>
+	</form></br>
+
+	List of Users:</br>
+		<table style="border:1px solid silver;">
+			<tr>
+				<th>index</th>
+				<th>Firstname</th>
+				<th>Lastname</th>
+				<th>Language</th>
+			</tr>
+			<tr ng-repeat="user in list track by $index">
+				<td>{{ user.firstname }}</td>
+				<td>{{ user.lastname }}</td>
+				<td>{{ user.lang }}</td>
+				<td><button ng-click="delete($index)">delete</button></td>
+			</tr>
+		</table>
+	<div>
+
+	</div>
+</body>
+</html>
