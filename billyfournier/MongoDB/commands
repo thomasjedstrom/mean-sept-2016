@@ -1,0 +1,35 @@
+use my_first_db
+db.createCollection('students')
+db.students.insert({name: 'A', home_state: 'Texas', lucky_number: 1, birthday: {month: 1, day: 1, year: 1}})
+db.students.insert({name: 'B', home_state: 'Texas', lucky_number: 2, birthday: {month: 2, day: 2, year: 2}})
+db.students.insert({name: 'C', home_state: 'Texas', lucky_number: 3, birthday: {month: 3, day: 3, year: 3}})
+db.students.insert({name: 'D', home_state: 'Texas', lucky_number: 4, birthday: {month: 4, day: 4, year: 4}})
+db.students.insert({name: 'E', home_state: 'Texas', lucky_number: 5, birthday: {month: 5, day: 5, year: 5}})
+db.students.find()
+db.students.find({home_state: 'Texas'})
+db.students.find({lucky_number: {$gt: 3}})
+db.students.find({lucky_number: {$lte: 10}})
+db.students.find({lucky_number: {$gt: 1, $lte: 9}})
+db.students.update( {}, {$set: {interests: ['coding','brunch','MongoDB']}},{multi: true} )
+
+db.students.update( {name: 'A'}, {$set: {aa: 1}})
+db.students.update( {name: 'B'}, {$set: {bb: 2}})
+db.students.update( {name: 'C'}, {$set: {cc: 3}})
+db.students.update( {name: 'D'}, {$set: {dd: 4}})
+db.students.update( {name: 'E'}, {$set: {ee: 5}})
+
+db.students.update( {name: 'E'}, {$push: {interests: 'taxes'}})
+db.students.update( {name: 'E'}, {$pull: {interests: 'taxes'}})
+
+db.students.remove({home_state: 'California'})
+db.students.remove({name: 'E'})
+db.students.remove({lucky_number: {$gt: 5}}, true)
+
+db.students.update({}, {$set: {number_of_belts: 0}}, {multi: true})
+db.students.update({home_state: 'Texas'}, {$inc: {number_of_belts: 1}},{multi: true})
+db.students.update({home_state: 'Texas'}, {$inc: {number_of_belts: 1}},{multi: true})
+
+db.students.update({}, {$rename: {number_of_belts: 'belts_earned'}},{multi:true})
+
+db.students.update({},{$unset: {lucky_number: 1}},{multi:true})
+db.students.update({}, {$set: {updated_on: Date()}},{multi:true})
