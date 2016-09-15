@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head>
+	<title>fav food</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.5/angular.min.js"></script>
+	 <script type='text/javascript' src="./app.js"></script>
+</head>
+<body ng-controller="favFood">
+	<form>
+		Fav Food: <input type="text" ng-model="newfd">
+		<input type="submit" ng-click="addFood()"></br>
+		
+		<div ng-if="newfd">
+			<span>currently typing: {{ newfd }}</span>
+		</div>
+	</form></br>
+	List of Food:</br>
+		<ul>
+			<li ng-repeat="food in list">{{ food }}</li>
+			<!-- <li ng-bind="favFoods"></li> -->
+		</ul>
+	<div>
+
+	</div>
+</body>
+</html>
