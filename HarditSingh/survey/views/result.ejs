@@ -1,0 +1,20 @@
+<html>
+<head>
+	<link rel="stylesheet" href="/style.css" type="text/css">
+</head>
+<body>
+	<div id="top">
+	<p>Thanks for submitting the information.
+<div id="wrap">
+	<div id="disp">
+		<p>Name: <%= data.name %></p>
+		<p>Location: <%= data.location %></p>
+		<p>Favorite Language: <%= data.language %></p>
+		<p>Comment: <%= data.comment %></p>
+	</div>	
+	<form action="/">
+		<label><input type="submit" name="submit" value="Go Back"></label>
+	</form>	
+</div>
+</body>
+</html>
