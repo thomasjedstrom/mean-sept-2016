@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="angApp">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src='bower_components/angular/angular.js'> </script>
+	<script>
+		var app = angular.module('angApp', []);
+		app.factory("productFactory", function(){
+			var count = 1;
+			var products = {};
+			var factory = {};
+
+			factory.getProducts = function() { return products;};
+
+			factory.addProduct = function(newProduct){
+				products[count] = newProduct;
+				count += 1;
+			}
+			factory.removeProduct = function(key){
+				delete products[key];
+			}
+			return factory;
+		});
+		app.controller('productController', function($scope,productFactory) {
+			$scope.products = productFactory.getProducts();
+			$scope.addProduct = function() { 
+				productFactory.addProduct($scope.newProduct);
+				$scope.newProduct = {};	
+			};
+			$scope.removeProduct = function(key) { productFactory.removeProduct(key);	};
+		});
+		
+	</script>
+</head>
+
+<body>
+	<div ng-controller="productController">
+		<form>
+			<label>Product Name:<input type="text" ng-model='newProduct.name'></label>
+			<label>Price:<input type="number" ng-model='newProduct.price'></label>
+			<input type="submit" value='Create product' ng-click='addProduct()'>
+		</form>
+
+		<table class='table'>
+			<tr>
+				<th>Product name </th>
+				<th>Price</th>
+				<th>Actions</th>
+			</tr>
+			<tr ng-repeat="(key,product) in products">
+				<td>{{product.name}}</td>
+				<td> {{product.price | currency}} </td>
+				<td><input type="submit" value='Delete' ng-click="removeProduct(key)"></td>
+			</tr>
+		</table>
+
+	</div>
+</body>
+
+</html>
