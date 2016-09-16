@@ -6,19 +6,20 @@
 	<script src="./bower_components/angular/angular.min.js"></script>
 	<script>
 		var app = angular.module('app', []);
-		app.controller('divController', function(){
-			this.food = [
+		app.controller('divController', ['$scope', '$log', function($scope, $log){
+			$scope.food = [
 				{name: 'Pizza'},
 				{name: 'BBQ'},
 				{name: 'Fries'},
 				{name: 'Salad'},
 				{name: 'Steak'},
 			];
-			this.addFood = function(){
-				this.food.push(this.newFood);
-				this.newFood = {};
+			$scope.addFood = function(){
+				$scope.food.push($scope.newFood);
+				$scope.newFood = {};
 			}
-		});
+			$log.info($scope);
+		}]);
 
 	</script>
 </head>
@@ -26,13 +27,15 @@
 	
 
 
-	<div ng-controller="divController as divCtrl">
+	<div ng-controller="divController">
 		
 		<form>
-			Favorite Food <input type='text' ng-model='divCtrl.newFood.name'>
-			<input type='submit' value='Add Food' ng-click='divCtrl.addFood()'>
+			Favorite Food <input type='text' ng-model='newFood.name'>
+
+			<input type='submit' value='Add Food' ng-click='addFood()'>
+
 		</form>
-		<span>Currently typing:</span> <span ng-bind="divCtrl.newFood.name"></span>
+		<span>Currently typing:</span> <span ng-bind="newFood.name"></span>
 		<br>
 		<br>
 		<br>
@@ -40,12 +43,8 @@
 
 		<div class="foods">
 			<input ng-model="filterText" placeholder="filter">
-
-
-
-
 			<ul>
-				<li ng-repeat="food in divCtrl.food | filter:filterText">{{ food.name }}</li>
+				<li ng-repeat="food in food | filter:filterText">{{ food.name }}</li>
 			</ul>
 		</div>
 
