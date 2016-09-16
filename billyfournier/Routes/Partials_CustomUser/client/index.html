@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+ <!-- THESE TWO VERSIONS BELOW MUST MATCH (good thing bower will catch that for us, but be aware if you are using CDN's)!!! -->
+    <script src="/angular/angular.js"></script>
+    <script src="angular-route/angular-route.js"></script>
+<script>
+    //  inject the ngRoute dependency in the module.
+    var myApp = angular.module('myApp', ['ngRoute']);
+    //  use the config method to set up routing:
+    myApp.config(function ($routeProvider) {
+      $routeProvider
+        .when('/',{
+            templateUrl: 'partials/partial1.htm',
+            // contoller: "CustomizeUsersController",
+        })
+        .when('/partial2',{
+            templateUrl: 'partials/partial2.htm'
+        })
+        .otherwise({
+          redirectTo: '/'
+        });
+    });
+
+    myApp.factory('userFactory', function(){
+      var factory = {};
+      var users = [{fname: 'Crystal', lname: 'howard', age: 28},
+                   {fname: 'Robert', lname: 'Johnson', age: 31}];
+      factory.index = function(){
+
+      };
+      factory.create = function(user){
+        users.push(user);
+      };
+      factory.delete = function(index){
+        users.splice(index,1);
+      };
+      factory.show = function(){
+        return users;
+      }
+      return factory;
+    });
+
+    //  build the controllers
+    myApp.controller('CustomizeUsersController', function ($scope,userFactory,$location) {
+      $scope.users = userFactory.show();
+      $scope.create = function(user){
+        userFactory.create(user);
+        console.log($location);
+        $location.url('/partial2');
+      }
+      $scope.removeUser = function(index){
+        userFactory.delete(index);
+      }
+    });
+    myApp.controller('UserListsController', function ($scope,userFactory) {
+      $scope.users = userFactory.show();
+    });
+    </script>
+    <style>
+      table, td, th {
+        border: 1px solid #ddd;
+        text-align: left;
+      }
+      th, td {
+        padding: 15px;
+        text-align: left;
+      }
+    </style>
+
+  </head>
+  <body>
+    <div ng-app='myApp'>
+        <a href="#/partial1">Customize Users</a> | <a href="#/partial2">Users List</a>
+        <div ng-view="">
+        </div>
+    </div>
+  </body>
+</html>
