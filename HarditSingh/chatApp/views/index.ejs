@@ -1,0 +1,45 @@
+<doctype !html>
+
+<html>
+	<head>
+		<link rel="stylesheet" href="/style.css">
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		<script type ="text/javascript" src="/socket.io/socket.io.js"></script>
+		<script type ="text/javascript">
+			$(document).ready(function (){
+				var name = prompt("Please enter your name");
+				var socket = io.connect();
+
+				if(name){
+					$('#messagebox').show();
+					$('#inputbox').show();
+				}
+				$('#messages').submit(function(){
+					res = {
+						'name'		:name,
+						'message'	:this.message.value
+					}
+					socket.emit("message", res ); 
+					this.message.value = '';
+					return false;
+				});
+				socket.on('updateMessageBox',function(res){
+					$('#messagebox').append('<p><span>'+res.name+':</span>'+res.message+'</p>')
+				})
+			});
+		</script>
+
+	</head>
+	<body>
+		<div id="wrap">
+			<div id="messagebox">
+				<% for(i in messages) {%>
+				<p><span><%= messages[i].name %>:</span><%= messages[i].message %></p>
+				<% }%>
+			</div>
+			<form id = 'messages'>
+				<input id ="inputbox" type="text" name="message">
+			</form>
+		</div>
+	</body>
+</html>

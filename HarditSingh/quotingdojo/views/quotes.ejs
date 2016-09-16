@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Quotes</title>
+	<link rel="stylesheet" href="/style.css" type="text/css">
+</head>
+<body>
+	<div id="wrap">
+	<h1>Here are the awesome quotes!</h1>
+	<div>
+		<ul>
+			<% for(i in data) {%>
+			<li>
+				<h3>" <%=data[i].quote%> "</h3>
+				<p><%=data[i].name%> at <%=data[i].created_at%> </p>
+			</li>
+			<% }%>
+		</ul>		
+	</div>	
+	<a href="/">Go back</a>
+	</div>
+</body>
+</html>
