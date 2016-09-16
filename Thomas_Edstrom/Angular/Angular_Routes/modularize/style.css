@@ -1,0 +1,16 @@
+*{
+	font-family: sans-serif;
+}
+#wrapper{
+	max-width: 1000px;
+	margin: auto;
+}
+#userForm{
+	display: inline-block;
+	border: 3px solid black;
+	padding: 1em;
+}
+td{
+	min-width: 10em;
+	text-align: center;
+}
