@@ -7,32 +7,64 @@
 		var app = angular.module('app', []);
 
 		app.factory('productFactory', function(){
+			var factory = {};
 			var products = [
 				{name: 'Keyboard', price: '149.99'},
 				{name: 'Mouse', price: '59.99'},
-				{name: 'Basketball', price: '59.99'}];
+				{name: 'Basketball', price: '59.99'}
+			];
 
-			var factory = {};
 
-			factory.getProducts = function(callback){
+
+			factory.index = function(callback){
+				callback(products)
+			}
+			factory.create = function(product, callback){
+				if(product.price && Number(parseFloat(product.price))==product.price){
+					products.push(product);
+					callback(products);
+				}
+			}
+			factory.delete = function(id, callback){
+				products.splice(id, 1);
 				callback(products);
 			}
-
-			factory.addProduct = function(product){
-				this.products.push(product)
-			}
+			// factory.getProducts = function(callback){
+			// 	callback(products);
+			// }
 
 			return factory;
 		})
 
 
-		app.controller('productsController', ['$scope', 'productFactory', function($scope, productFactory){
+		app.controller('productsController', ['$scope', 'productFactory', '$log', function($scope, productFactory, $log){
 
-			$scope.products = []
-
-			productFactory.getProducts(function(data){
+			function setProducts(data){
 				$scope.products = data;
-			})
+				$scope.product = {};
+			}
+
+			$scope.product = {};
+			$scope.products = [];
+
+			$scope.index = function(){
+				productFactory.index(setProducts);
+			}
+			$scope.index();
+			$log.info($scope)
+
+			//
+
+			$scope.create = function(){
+				productFactory.create($scope.product, setProducts);
+			}
+			$scope.delete = function(id){
+				productFactory.delete(id, setProducts);
+			}
+
+			// productFactory.getProducts(function(data){
+			// 	$scope.products = data;
+			// });
 		}])
 
 	</script>
@@ -40,25 +72,26 @@
 <body ng-app='app'>
 		<div ng-controller='productsController as productsCtrl'>
 
-			<form ng-submit='productsCtrl.addUser()'>
-				Product Name <input type='text' ng-model='productsCtrl.newUser.first_name'><br>
-				Product Price <input type='number' ng-model='productsCtrl.newUser.last_name'><br>
-				<input type='submit' value='Create User'>
+			<form ng-submit='create()'>
+				Product Name <input type='text' ng-model='product.name'><br>
+				Product Price <input type='number' ng-model='product.price'><br>
+				<input type='submit' value='Add Product'>
 			</form>
 
-			Search Users: <input type="text" ng-model="filter_users">
+
+
+
+			Search Products: <input type="text" ng-model="filter_products">
 			<table>
 				<tr>
-					<th>First Name</th>
-					<th>Last Name</th>
-					<th>Fav Language</th>
+					<th>Name</th>
+					<th>Price</th>
 					<th>Actions</th>
 				</tr>
-				<tr ng-repeat="user in usersCtrl.users | filter:filter_users">
-					<td>{{ user.first_name }}</td>
-					<td>{{ user.last_name }}</td>
-					<td>{{ user.language }}</td>
-					<td><button ng-click="usersCtrl.deleteUser(user.first_name)">Delete</button></td>
+				<tr ng-repeat="product in products | filter:filter_products">
+					<td>{{ product.name }}</td>
+					<td>{{ product.price | currency:"USD $" }}</td>
+					<td><button ng-click="delete($index)">Delete</button></td>
 				</tr>
 			</table>
 		</div>
