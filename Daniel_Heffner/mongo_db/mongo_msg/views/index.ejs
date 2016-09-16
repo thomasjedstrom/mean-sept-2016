@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Dojo Messages</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="styles.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="page-header">
+				<h1>The Dojo Message Board</h1>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-12">
+				<form class="form" action="/" method="post">
+					<input type="hidden" name="action" value="message">
+					<div class="form-group">
+						<label for="name">Name</label>
+						<input type="text" name="name" id="name" class="form-control">
+					</div>
+					<div class="form-group">
+						<label for="message">Message</label>
+						<textarea type="text" name="message" id="message" rows="4" class="form-control"></textarea>
+					</div>
+					<div class="form-group text-right">
+						<input type="submit" value="Post message" class="btn btn-primary">
+					</div>
+				</form>
+			</div>
+		</div>
+		<% for (var i = 0; i < messages.length; i++){ %>
+			<div class="row">
+				<div class="col-sm-offset-2 col-sm-10 panel panel-default">
+					<div class="panel-body">
+						<p class="lead">Name: <%= messages[i].name %></p>
+						<p class="lead">Message: <%= messages[i].message %></p>
+					</div>
+				</div>
+			</div>
+			<% for (var j = 0; j < messages[i].comments.length; j++){ %>
+				<div class="row">
+					<div class="col-sm-offset-4 col-xs-offset-2 col-sm-8 col-xs-10 panel panel-default">
+						<div class="panel-body">
+							<p>Name: <%= messages[i].comments[j].name %></p>
+							<p>Comment: <%= messages[i].comments[j].comment %></p>
+						</div>
+					</div>
+				</div>
+			<% } %>
+			<div class="row">
+				<div class="col-sm-offset-4 col-xs-offset-2 col-sm-8 col-xs-10">
+					<form class="form" action="/" method="post">
+						<input type="hidden" name="action" value="<%= messages[i]._id %>">
+						<div class="form-group">
+							<label for="name">Name</label>
+							<input type="text" name="name" id="name" class="form-control">
+						</div>
+						<div class="form-group">
+							<label for="comment">Comment</label>
+							<textarea type="text" name="comment" id="comment" rows="4" class="form-control"></textarea>
+						</div>
+						<div class="form-group text-right">
+							<input type="submit" value="Post comment" class="btn btn-primary">
+						</div>
+					</form>
+				</div>
+			</div>
+		<% } %>
+	</div>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Button Fun</title>
+	<script>
+	    var nIntervId;
+	 
+	    function changeColor() {
+	      nIntervId = setInterval(flash, 1000);
+	    }
+	 
+	    function flash() {
+	      var oElem = document.getElementById("btn");
+	      oElem.style.backgroundColor = oElem.style.backgroundColor == "red" ? "blue" : "red";
+	    }
+	 
+	    function stopTextColor() {
+	      clearInterval(nIntervId);
+	    }
+  	</script>
+	<style>
+	#btn { 
+	    border: none;
+	    color: white;
+	    padding: 15px 32px;
+	    text-align: center;
+	    text-decoration: none;
+	    display: inline-block;
+	    font-size: 16px;
+	    margin: 4px 2px;
+	    cursor: pointer;
+	    -webkit-transition-duration: 0.4s; /* Safari */
+	    transition-duration: 0.4s;
+	}
+	
+	#btn:hover {
+	    background-color: green;
+	}
+	#btn:active {
+	  background-color: #3e8e41;
+	  box-shadow: 0 5px #667;
+	  background-color: red;
+	  transform: translateY(4px);
+	}
+	</style>
+
+</head>
+<body>
+
+<h1>Button Fun</h1>
+	<button id="btn" onclick="changeColor();">Click Me!</button>
+</body>
+</html>
