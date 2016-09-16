@@ -1,0 +1,149 @@
+<html ng-app='myApp'>
+  <head>
+    <script src = 'bower_components/angular/angular.js'></script>
+    <script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.3.5/angular.min.js'></script>
+
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+    <script type='text/javascript'>
+      var myAppModule = angular.module('myApp', []);
+      // the .controller() method adds a controller to the module
+      myAppModule.controller('studentsController', function ($scope){
+          $scope.students = [
+            {name: 'Mike', age: 34},
+            {name: 'John', age: 24},
+            {name: 'Trey', age: 24},
+            {name: 'India', age: 35}
+          ];
+          $scope.myName = 'your name'; // your name!
+          $scope.myFavoriteLanguage = 'JavaScript';
+          $scope.myFavoriteJSLibrary = 'Angular';
+      });
+
+      myAppModule.controller('formController', function ($scope){
+          $scope.d_filter;
+          $scope.food;
+          $scope.foods = ['apple', 'banana', 'cherry'];
+          $scope.foodClick = function(){
+            console.log($scope.food);
+          }
+          $scope.update = function(food) {
+            console.log(typeof(food));
+            $scope.foods.push(food);
+            $scope.food= null;
+            console.log($scope.foods);
+          };
+      });
+
+      myAppModule.controller('repeatController', function($scope){
+        $scope.records = [
+          {
+              "Name" : "Alfreds Futterkiste",
+              "Country" : "Germany"
+          },
+          {
+              "Name" : "Berglunds snabbköp",
+              "Country" : "Sweden"
+          },
+          {
+              "Name" : "Centro comercial Moctezuma",
+              "Country" : "Mexico"
+          },
+          {
+              "Name" : "Ernst Handel",
+              "Country" : "Austria"
+          }
+        ];
+      });
+    </script>
+  </head>
+  
+<body>
+  <div class="container">
+    <!--  ng-bind; ng-model; ng-repeat; ng-repeat (w/ filter); ng-if; ng-hide; ng-show; ng-init; ng-click, ng-submit -->
+
+
+    <!-- ng-model  &  ng-click  &  ng-repeat  -->
+    <div class="row" ng-controller='formController'>
+      <div class="col-sm-6" >
+        <div class="row" >
+          <form class="form-inline">
+            <div class="form-group">
+              <label for="food">Favorite Food:</label>
+              <input type="text" class="form-control" id="food" ng-model="food">
+            </div>
+            <button type="submit" class="btn btn-default" ng-click ='update(food)' >Add Food</button>
+          </form>
+        </div>
+        <div class="row">
+          <p>Currently typing: <span>{{ food }}</span></p>
+        </div>
+      </div>
+      <!--  ng-repeat w/ filter :filter -->
+      <div class="col-sm-6">
+        <form class="form-horizontal" ng-submit="myFunc()">
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="Enter food" ng-model="d_filter">
+          </div>
+          <div class="form-group">
+            <select multiple class="form-control" id="sel2">
+              <option ng-repeat='x in foods | filter : d_filter '>{{x}}</option>
+            </select>
+          </div>
+        </form>
+      </div>
+    </div> <!-- end of formController -->
+
+    <!-- ng-if  ** (used ng-model & ng-init  and  did this without setting up a controller) -->
+    <div class="row" >
+      <div class="col-sm-6 col-sm-offset-3">
+        <form>
+          <label class="checkbox-inline">
+            <input type="checkbox" value="" ng-model='check1' ng-init='check1 = true'>Option 1
+          </label>
+          <label class="checkbox-inline">
+            <input type="checkbox" value="" ng-model='check2' ng-init='check2 = true'>Option 2
+          </label>
+          <label class="checkbox-inline">
+            <input type="checkbox" value="" ng-model='check3' ng-init='check3 = true'>Option 3
+          </label>
+
+          <div class="form-group">
+            <select multiple class="form-control" id="sel2">
+              <option ng-repeat='x in foods | filter : d_filter '>{{x}}</option>
+              <option ng-if="check1">Option 1</option>
+              <option ng-if="check2">Option 2</option>
+              <option ng-if="check3">Option 3</option>
+            </select>
+          </div>
+        </form>
+      </div>
+    </div> <!-- end of checkboxController -->
+
+    <!--  ng-controller  &&   ng-repeat  -->
+    <div class="row" ng-controller='repeatController'>
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Country</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat='x in records'>
+            <td>{{x.Name}}</td>
+            <td>{{x.Country}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!--  students -->
+    <div class='col-sm-12' ng-controller='studentsController'>
+      <ul>
+          <li ng-repeat="student in students">{{ student.name }},{{ student.age }}</li>
+      </ul>
+    </div>
+
+  </div>
+</body>
+</html>
