@@ -1,0 +1,18 @@
+<div ng-controller="list_controller">
+	<table>
+		<thead>
+			<tr>
+				<th ng-click="orderBy('fname')"><button>First Name</button></th>
+				<th ng-click="orderBy('lname')"><button>Last Name</button></th>
+				<th ng-click="orderBy('language')"><button>Favorite Language</button></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="user in users | orderBy:col:reverse">
+				<td>{{user.fname}}</td>
+				<td>{{user.lname}}</td>
+				<td>{{user.language}}</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
