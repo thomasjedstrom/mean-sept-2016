@@ -1,0 +1,104 @@
+<html>
+<head>
+  <title></title>
+  <script src='bower_components/angular/angular.js'></script>
+  <script type='text/javascript'>
+    var myApp = angular.module('myApp', []);
+
+    myApp.factory('itemFactory', function($http){
+      var items = [
+        {name: 'Keyboard', price: 149.99, qty: 50 },
+        {name: 'iPad', price: 499.99, qty: 50},
+        {name: 'xbox', price: 299.99, qty: 50},
+      ]
+      var factory = {};
+      // Add a getStudents key to the factory object with a value of a function.
+      factory.getItems = function (callback){
+          // Pass the students to a callback to be used by whoever calls the method
+          callback(items);
+      }
+      factory.removeItem = function(index){
+        items.splice(index,1);
+      }
+      factory.addItem = function(item){
+        items.push(item);
+      }
+      factory.soldItem = function(index){
+        items[index].qty--;
+      }
+
+      // Most important step: return the object so it can be used by the rest of our angular code
+      return factory;
+    });
+
+    myApp.controller('itemsController', function ($scope, itemFactory){
+      // run the getStudents method and set $scope data in the callback
+      itemFactory.getItems(function (data){
+        $scope.items = data;
+      });
+      $scope.removeItem = function(index){
+        itemFactory.removeItem(index);
+      }
+      $scope.addItem = function(item){
+        item.qty = 50;
+        itemFactory.addItem(item);
+        $scope.newItem = null;
+      }
+      $scope.buyItem = function(index){
+        itemFactory.soldItem(index);
+      }
+
+
+    });
+  </script>
+
+  <style>
+  table, th, td {
+    border: 1px solid black;
+  }
+  </style>
+</head>
+<body ng-app='myApp'>
+  <br>
+  <div ng-controller='itemsController'>
+    {{user}}
+    <form>
+      <p>Item name: <input type="text" ng-model='newItem.name'></p>
+      <p>Price: <input type="text" ng-model='newItem.price'></p>
+      <button ng-click='addItem(newItem)'>Create Item</button>
+
+    </form>
+    <table>
+      <tr>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Actions</th>
+      </tr>
+      <p>{{users}}</p>
+      <p ng-repeat='x in items'></p>
+      <tr ng-repeat='x in items track by $index'>
+        <td>{{x.name}}</td>
+        <td>{{x.price | currency}}</td>
+        <td><button ng-click='removeItem($index)'>Delete User</button></td>
+      </tr>
+    </table> <!-- end table -->
+
+    <table>
+      <tr>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Actions</th>
+      </tr>
+      <p>{{users}}</p>
+      <p ng-repeat='x in items'></p>
+      <tr ng-repeat='x in items track by $index'>
+        <td>{{x.name}}</td>
+        <td>{{x.price | currency}}</td>
+        <td>{{x.qty}}</td>
+        <td><button ng-click='buyItem($index)' ng-if='x.qty > 0'>Buy</button></td>
+      </tr>
+    </table> <!-- end table -->
+
+  </div>
+</body>
+</html>
