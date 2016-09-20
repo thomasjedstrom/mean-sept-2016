@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Dashboard</title>
+	<link rel="stylesheet" href="/style.css" type="text/css">
+	</script>
+
+</head>
+<body>
+	<div id="wrap">
+		<div id="disp">
+			<h1>Lions</h1>
+			<table class='table'>
+				<tr>
+					<th>Name </th>
+					<th>Action</th>
+				</tr>
+				<% for(i in data) { %>
+					<tr>
+						<td><a href="/lion/<%=data[i]._id %>"><%= data[i].name %> </a></td> 
+						<td><a href="/lion/<%=data[i]._id %>/edit">edit</a>
+						<a href="/lion/<%=data[i]._id %>/destroy">delete</a></td>
+						
+					</tr>
+				<% } %>
+			</table>
+
+		</div>
+		<div>
+			<form action="/add">
+				<label><input type="Submit" name='Add' value='Add'></label>
+			</form>
+		</div>
+	</div>
+</body>
+</html>

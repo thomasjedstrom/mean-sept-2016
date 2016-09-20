@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Edit</title>
+	<link rel="stylesheet" href="/style.css" type="text/css">
+</head>
+<body>
+	<div>
+		<form action="/lion/<%=data._id%>" method='POST'>
+			<label>Name: 	<input type="text" name='name' value=<%=data.name%> ></label>
+			<label>			<input type="Submit" name='Add' value='Edit'></label>
+		</form>
+	</div>	
+</body>
+</html>
