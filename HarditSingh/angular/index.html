@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="angApp">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src = 'bower_components/angular/angular.js'> </script>
+	<script>
+		var app = angular.module('angApp', []);
+		app.controller('divController', function($scope) {
+			$scope.myName = 'Hardit'; // your name!
+			$scope.myFavoriteLanguage = 'JavaScript';
+			$scope.myFavoriteJSLibrary = 'Angular';
+		})
+	</script>
+</head>
+<body>
+	<div ng-controller = "divController" id = "myController">
+		<h1>Hello my name is {{myName}} and my favorite language is {{myFavoriteLanguage}} because the {{myFavoriteJSLibrary}}</h1>
+	</div>	
+</body>
+</html>
