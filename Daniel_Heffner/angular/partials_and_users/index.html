@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Custom Users</title>
+	<script src="bower_components/angular/angular.js"></script>
+	<script src="bower_components/angular-route/angular-route.js"></script>
+	<script src="main.js"></script>
+	<script src="factories/user_factory.js"></script>
+	<script src="controllers/list_controller.js"></script>
+	<script src="controllers/user_controller.js"></script>
+</head>
+<body ng-app='user_app'>
+	<h3>Menu</h3>
+	<p><a href="#/users">Users</a></p>
+	<p><a href="#/list">User List</a></p>
+	<div ng-view></div>
+</body>
+</html>

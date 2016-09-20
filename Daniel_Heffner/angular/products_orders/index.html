@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en" ng-app='product_order'>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Products</title>
+	<script src="bower_components/angular/angular.min.js"></script>
+	<script src="main.js"></script>
+	<script src="factories/product.js"></script>
+	<script src="controllers/products.js"></script>
+	<script src="controllers/orders.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+</head>
+<body>
+	<div class="container">
+		<div class="row" style="padding-top: 10px;">
+			<div class="col-md-12">
+				<div class="panel panel-primary" ng-controller="product_controller">
+					<div class="panel-heading">
+						<h3>Products Controller</h3>
+					</div>
+					<div class="panel-body">
+						<form class="form-horizontal" ng-submit="addProduct()">
+							<div class="form-group form-group-lg">
+								<label for="name" class="col-sm-4 control-label">Product Name</label>
+								<div class="col-sm-4">
+									<p class="text-danger" ng-bind="error.name"></p>
+									<input type="text" class="form-control" id="name" ng-model="new.name">
+								</div>
+							</div>
+							<div class="form-group form-group-lg">
+								<label for="price" class="col-sm-4 control-label">Product Price</label>
+								<div class="col-sm-4">
+									<p class="text-danger" ng-bind="error.price"></p>
+									<input type="number" step="0.01" class="form-control" id="price" ng-model="new.price">
+								</div>
+								<div class="col-sm-2 control-label">
+									<input type="submit" class="btn btn-lg btn-primary" value="Add Product">
+								</div>
+							</div>
+						</form>
+					</div>
+					<table class="table" ng-if="products.length > 0">
+						<thead>
+							<tr>
+								<th class="text-center">
+									<span class="btn btn-default glyphicon glyphicon-collapse-down" ng-if="(col == 'name') && reverse" ng-click="sortBy('name')"></span>
+									<span class="btn btn-default glyphicon glyphicon-collapse-up" ng-if="(col == 'name') && !reverse" ng-click="sortBy('name')"></span>
+									<span class="btn btn-default glyphicon glyphicon-unchecked" ng-if="col != 'name'" ng-click="sortBy('name')"></span>
+									 Name
+								</th>
+								<th class="text-center">
+									<span class="btn btn-default glyphicon glyphicon-collapse-down" ng-if="(col == 'price') && reverse" ng-click="sortBy('price')"></span>
+									<span class="btn btn-default glyphicon glyphicon-collapse-up" ng-if="(col == 'price') && !reverse" ng-click="sortBy('price')"></span>
+									<span class="btn btn-default glyphicon glyphicon-unchecked" ng-if="col != 'price'" ng-click="sortBy('price')"></span>
+									 Price
+								</th>
+								<th class="text-center">Actions</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="product in products | orderBy:col:reverse">
+								<td class="text-center">{{ product.name }}</td>
+								<td class="text-center">{{ product.price | currency }}</td>
+								<td class="text-center"><button class="btn btn-danger" ng-click="destroy(product.id)">Delete Product</button></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="panel panel-primary" ng-controller="order_controller">
+					<div class="panel-heading">
+						<h3>Orders Controller</h3>
+					</div>
+					<table class="table" ng-if="products.length > 0">
+						<thead>
+							<tr>
+								<th class="text-center">
+									<span class="btn btn-default glyphicon glyphicon-collapse-down" ng-if="(col == 'name') && reverse" ng-click="sortBy('name')"></span>
+									<span class="btn btn-default glyphicon glyphicon-collapse-up" ng-if="(col == 'name') && !reverse" ng-click="sortBy('name')"></span>
+									<span class="btn btn-default glyphicon glyphicon-unchecked" ng-if="col != 'name'" ng-click="sortBy('name')"></span>
+									 Name
+								</th>
+								<th class="text-center">
+									<span class="btn btn-default glyphicon glyphicon-collapse-down" ng-if="(col == 'price') && reverse" ng-click="sortBy('price')"></span>
+									<span class="btn btn-default glyphicon glyphicon-collapse-up" ng-if="(col == 'price') && !reverse" ng-click="sortBy('price')"></span>
+									<span class="btn btn-default glyphicon glyphicon-unchecked" ng-if="col != 'price'" ng-click="sortBy('price')"></span>
+									 Price
+								</th>
+								<th class="text-center">Quantity</th>
+								<th class="text-center">Actions</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="product in products | orderBy:col:reverse">
+								<td class="text-center">{{ product.name }}</td>
+								<td class="text-center">{{ product.price | currency }}</td>
+								<td class="text-center">{{ product.qty }}</td>
+								<td class="text-center"><button class="btn btn-success" ng-click="buy(product.id)">Buy Product</button></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
