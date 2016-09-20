@@ -1,0 +1,56 @@
+<html>
+<head>
+	<title>Filters</title>
+	<script src='bower_components/angular/angular.js'></script>
+	<script src="main.js" type='text/javascript'></script>
+	<script src="factories.js" type='text/javascript'></script>
+	<script src="productsController.js" type='text/javascript'></script>
+	<script src="ordersController.js" type='text/javascript'></script>
+</head>
+<body ng-app='app'>
+
+	<div ng-controller='productsController as productsCtrl'>
+		<h1>Products Controller</h1>
+		<form ng-submit='create()'>
+			Product Name <input type='text' ng-model='product.name'><br>
+			Product Price <input type='number' ng-model='product.price'><br>
+			<input type='submit' value='Add Product'>
+		</form>
+
+		Search Products: <input type="text" ng-model="filter_products">
+		<table>
+			<tr>
+				<th>Name</th>
+				<th>Price</th>
+				<th>Actions</th>
+			</tr>
+			<tr ng-repeat="product in products | filter:filter_products">
+				<td>{{ product.name }}</td>
+				<td>{{ product.price | currency:"USD $" }}</td>
+				<td><button ng-click="delete($index)">Delete</button></td>
+			</tr>
+		</table>
+	</div>
+
+	<div ng-controller='ordersController as ordersCtrl'>
+		<h1>Orders Controller</h1>
+		<table>
+			<tr>
+				<th>Name</th>
+				<th>Price</th>
+				<th>Qty Available</th>
+				<th>Actions</th>
+			</tr>
+			<tr ng-repeat="product in products | filter:filter_products">
+				<td>{{ product.name }}</td>
+				<td>{{ product.price | currency:"USD $" }}</td>
+				<td>{{ product.qty }}</td>
+				<td><button ng-click="buy($index)" ng-if="product.qty>0">Buy</button></td>
+			</tr>
+		</table>		
+	</div>		
+
+
+
+</body>
+</html>
