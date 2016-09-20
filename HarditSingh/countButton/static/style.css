@@ -1,0 +1,17 @@
+* {
+	color: blue;
+}
+#wrapper {
+	width: 60%;
+	margin: 0 auto;
+}
+#disp {
+	border: 1px solid  black;
+	background-color: green;
+	color: white;
+	padding: 20px;
+}
+
+#button {
+	margin: 20px 0;
+}

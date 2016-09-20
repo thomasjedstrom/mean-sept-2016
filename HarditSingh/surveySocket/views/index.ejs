@@ -1,0 +1,51 @@
+
+<html>
+  <head>
+    <link rel="stylesheet" href="/style.css" type="text/css">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script type ="text/javascript" src="/socket.io/socket.io.js"></script>
+    <script type ="text/javascript">
+       $(document).ready(function (){
+            // this triggers the connection event in our server!
+            var socket = io.connect();
+            $('form').submit(function(){
+              event.preventDefault();              
+              var data = {
+                'name': this.name.value,
+                'location': this.location.value,
+                'language':this.language.value,
+                'comment': this.comment.value
+              }
+              socket.emit('sendData',data);
+              socket.on('emitData',function(html_str){
+                $('#disp').html(html_str);
+                
+              })
+            })
+        })
+    </script>
+  </head>
+  <body>
+    <div id="wrapper">
+    <div id="disp"></div>	
+    <div id="survey">
+      <form>
+            <label>Your Name: <input type="text" name = "name" placeholder="Your Name"></label>
+            <label>Dojo Location: <select name="location" id="loc">
+                <option value="dallas">Dallas</option>
+                <option value="seattle">Seattle</option>
+                <option value="sanJose">San Jose</option>
+            </select></label>
+            <label>Language:<select name="language" id="lang">
+                <option value="python">Python</option>
+                <option value="cSharp">C#</option>
+                <option value="javascript">JavaScript</option>
+            </select></label>
+            <label>Comment (optional):
+           <textarea  name = "comment"></textarea></label>
+           <label> <input type="submit" value = 'Submit' name = 'submit' ></label>
+        </form>
+    </div>
+    </div>
+  </body>
+</html>
