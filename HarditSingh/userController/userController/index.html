@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="angApp">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src = 'bower_components/angular/angular.js'> </script>
+	<script>
+		var app = angular.module('angApp', []);
+		app.controller('userController', function($scope) {
+			$scope.users = {};
+			$scope.count = 1;
+			$scope.addUser = function() {
+				$scope.users[$scope.count] = $scope.newUser;
+				$scope.newUser={};
+				$scope.count+=1;
+			}
+			$scope.removeUser = function(id) {
+				delete $scope.users[id];
+			}
+		});
+	</script>
+</head>
+<body>
+	<div ng-controller = "userController">
+		<form>
+			<label>First Name:<input type="text" ng-model='newUser.firstName'></label>
+			<label>Last Name:<input type="text" ng-model='newUser.lastName'></label>
+			<label>Fav Language:<input type="text" ng-model='newUser.favLang'></label>
+			<input type="submit" value='Create User' ng-click='addUser()'>
+		</form>
+
+		<table class='table'>
+			<tr>
+				<th>First Name </th>
+				<th>Last Name </th>
+				<th>Fav Language </th>
+				<th>Actions</th>
+			</tr>
+				<tr ng-repeat="(key,user) in users">
+					<td>{{user.firstName}}</td> 
+					<td> {{user.lastName}} </td>
+					<td> {{user.favLang}} </td>
+					<td><input type="submit" value ='Delete' ng-click="removeUser(key)"></td>
+				</tr>
+		</table>
+
+	</div>
+</body>
+</html>

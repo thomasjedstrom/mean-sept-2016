@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="angApp">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src = 'bower_components/angular/angular.js'> </script>
+	<script>
+		var app = angular.module('angApp', []);
+		app.controller('divController', function($scope) {
+			$scope.favFood = [];
+			$scope.addFood = function() {
+				console.log("here");
+				$scope.favFood.push($scope.food);
+				$scope.food='';
+			}
+			$scope.myTxt = "dont click this";
+				$scope.func = function() {
+					$scope.myTxt = "you clicked it didnt you";
+			}			
+		});
+	</script>
+</head>
+<body>
+	<div ng-controller = "divController">
+		<form>
+			Favorite Food <input type="text" ng-model='food'>
+			<input type="submit" value='Add Food' ng-click='addFood()'>
+		</form>
+		{{food}}
+		<div id="listDisplay">
+			<label> <input type="text" placeholder="filter.." ng-model='filter'></label>
+			<ul>
+				<li ng-repeat="food in favFood | filter: filter" >{{food}}</li>
+			</ul>
+		</div>
+
+		<form ng-submit= 'func()' >
+			{{myTxt}}
+			<input type="submit" value='Danger''>
+		</form>
+
+		hide/show: <input type="checkbox" ng-model="hide">
+
+		<div ng-hide=hide>
+			<h1>Visible</h1>
+		</div>
+
+	</div>
+</body>
+</html>
