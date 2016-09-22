@@ -1,12 +1,15 @@
-var users = require('../controllers/users.js');
+var customers 	= require('../controllers/customers.js'),
+	products	= require('../controllers/products.js'),
+	orders		= require('../controllers/orders.js');
 
 module.exports = function(app){
-	app.post('/register', users.create);
-	app.post('/login', users.login);
+	app.get('/customers/index', customers.index);
+	app.post('/customers/create', customers.create);
+	app.post('/customers/delete/:id', customers.delete);
 
-	// app.get('/users', users.index);
-	// app.get('/users/:id', users.show);
-	// app.post('/users', users.create);
-	// app.put('/users/:id', users.update);
-	// app.delete('/users/:id', users.delete);
+	app.get('/products/index', products.index);
+	app.post('/products/create', products.create);
+
+	app.get('/orders/index', orders.index);
+	app.post('/orders/create', orders.create);
 }

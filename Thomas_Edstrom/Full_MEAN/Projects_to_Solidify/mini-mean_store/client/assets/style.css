@@ -1,15 +1,21 @@
 *{
 	font-family: sans-serif;
 }
-
+#wrapper{
+	display: flex;
+	flex-wrap: wrap;
+}
+.fw{
+	width: 100vw;
+}
 table {
-    border: 1px solid black;
+    border: 3px solid black;
     border-collapse: collapse;
 }
 
 th, td {
-    border-left: 1px solid black;
-    border-right: 1px solid black;
+    border-left: 3px solid black;
+    border-right: 3px solid black;
 }
 tr:nth-child(even) {background-color: #f2f2f2}
 th {
@@ -45,7 +51,15 @@ th {
 	font-size: 1em;
 	padding: 4px;
 }
-input{
+.blue{
+	background: blue;
+	color: white;
+}
+.red{
+	background: red;
+	color: white;
+}
+input, textarea{
 	border: 3px solid black;
 	margin: 5px;
 }
@@ -57,3 +71,44 @@ input{
 	padding: 4px;
 	line-height: 2.5em;
 }
+.leftnav{
+	display: block;
+	width: 15em;
+	height: 90vh;
+}
+
+
+
+
+/*========== PRODUCTS ===============*/
+#productListing{
+	display: block;
+	margin: 0px;
+	flex: 1;
+}
+.productBox{
+	display: inline-block;
+	width: 15em;
+	height: 10em;
+	margin: 12px;
+	text-align: center;
+}
+.image{
+	border: 3px solid black;
+	width: 150px;
+	height: 150px;
+	margin: auto;
+}
+
+/*=========== DASHBOARD ===============*/
+#dashboardContainer{
+	display: flex;
+	flex-wrap: wrap;
+	flex: 1;
+}
+.dashboardRow{
+	display: block;
+	margin: 0px;
+	flex-basis: 80vw;
+}
+

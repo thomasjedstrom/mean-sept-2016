@@ -2,11 +2,11 @@ var mongoose = require('mongoose'),
 
 OrderSchema = new mongoose.Schema({
 	product: {
-		type: String,
+		type: Object,
 	},
-	user: {
-		type: String,
-	}
+	customer: {
+		type: Object,
+	},
 	qty: {
 		type: Number,
 	}
